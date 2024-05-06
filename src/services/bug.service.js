@@ -51,6 +51,7 @@ function getDefaultFilter() {
     txt: "",
     severity: "",
     labels: "",
+    sortBy: "createdAt",
   }
 }
 

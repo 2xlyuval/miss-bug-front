@@ -10,7 +10,7 @@ export function BugIndex() {
   const [bugs, setBugs] = useState([])
   const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
   const debounceSetFilterBy = utilService.debounce(onSetFilterBy, 500)
-
+  console.log("filterBy", filterBy)
   useEffect(() => {
     loadBugs()
   }, [filterBy])

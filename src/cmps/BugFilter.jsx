@@ -68,6 +68,17 @@ export function BugFilter({ filterBy, onSetFilterBy }) {
           </option>
         ))}
       </select>
+      <h4>Sort</h4>
+      <select
+        name="sortBy"
+        placeholder="Sort by"
+        value={filterByToEdit.sortBy}
+        onChange={handleChange}
+      >
+        <option value="createdAt">Created At</option>
+        <option value="severity">Severity</option>
+        <option value="title">Title</option>
+      </select>
     </section>
   )
 }
