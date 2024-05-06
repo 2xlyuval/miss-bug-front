@@ -3,7 +3,7 @@ var axios = Axios.create({
   withCredentials: true,
 })
 
-const BASE_URL = "//localhost:3030/api/bug/"
+const BASE_URL = "/api/bug/"
 
 export const bugService = {
   query,
