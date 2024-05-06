@@ -3,7 +3,12 @@ var axios = Axios.create({
   withCredentials: true,
 })
 
-const BASE_URL = "//localhost:3030/api/user/"
+// const BASE_URL = "//localhost:3030/api/user/"
+// const BASE_URL = "/api/user/"
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "/api/user/"
+    : "//localhost:3030/api/user/"
 
 export const userService = {
   query,
