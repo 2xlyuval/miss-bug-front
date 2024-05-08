@@ -1,4 +1,5 @@
-import { bugService } from "../services/bug.service.js"
+// import { bugService } from "../services/bug.service.js"
+import { bugService } from "../services/_bug.service.local.js"
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 import { BugList } from "../cmps/BugList.jsx"
 import { useState } from "react"
@@ -10,7 +11,7 @@ export function BugIndex() {
   const [bugs, setBugs] = useState([])
   const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
   const debounceSetFilterBy = utilService.debounce(onSetFilterBy, 500)
-  console.log("filterBy", filterBy)
+
   useEffect(() => {
     loadBugs()
   }, [filterBy])
