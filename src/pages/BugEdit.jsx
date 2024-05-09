@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useOutletContext, useParams } from "react-router"
-import { bugService } from "../services/_bug.service.local"
+// import { bugService } from "../services/_bug.service.local"
+import { bugService } from "../services/bug.service"
 
 export function BugEdit() {
   const { bugId } = useParams()

@@ -1,5 +1,5 @@
-import { useEffect } from "react"
 import { NavLink } from "react-router-dom"
+import { LoginSignup } from "./LoginSignup"
 
 export function AppHeader() {
   return (
@@ -11,6 +11,7 @@ export function AppHeader() {
           <NavLink to="/about">About</NavLink>
         </nav>
         <h1>Bugs are Forever</h1>
+        <LoginSignup />
       </div>
     </header>
   )
