@@ -1,21 +1,16 @@
 export const bugsData = [
   {
-    _id: "vzZl2H",
-    createdAt: 1713626844493,
-    title: "UI Alignment Issue on Profile Page",
-    severity: 1,
-    description:
-      "The profile picture appears misaligned on smaller screen sizes.",
-    labels: ["UI", "design", "alignment", "low severity"],
-  },
-  {
     _id: "ouNhdF",
     createdAt: 1713632016997,
     title: "Spelling Mistake in Error Message",
-    severity: 2,
+    severity: 1,
     description:
       "There is a typographical error in the error message displayed during login.",
     labels: ["UI", "text", "error message", "low severity"],
+    creator: {
+      _id: "6iieS1",
+      fullName: "Yuval Mor",
+    },
   },
   {
     _id: "hCnd1V",
@@ -25,6 +20,10 @@ export const bugsData = [
     description:
       "The 'Save Changes' button remains inactive even after making modifications in the settings.",
     labels: ["UI", "interaction", "button", "low severity"],
+    creator: {
+      _id: "u105",
+      fullName: "Charlie Brown",
+    },
   },
   {
     _id: "0MFLpQ",
@@ -34,6 +33,10 @@ export const bugsData = [
     description:
       "The tooltip displayed on hovering over an icon does not match its functionality.",
     labels: ["UI", "tooltip", "interaction", "low severity"],
+    creator: {
+      _id: "u104",
+      fullName: "Bob Smith",
+    },
   },
   {
     _id: "ilvaIM",
@@ -43,6 +46,10 @@ export const bugsData = [
     description:
       "One of the links in the help section redirects to a non-existent page.",
     labels: ["UI", "help", "link", "low severity"],
+    creator: {
+      _id: "u104",
+      fullName: "Bob Smith",
+    },
   },
   {
     _id: "vzZl5H",
@@ -52,6 +59,10 @@ export const bugsData = [
     description:
       "An attacker can inject malicious scripts into the forum pages, leading to potential data theft or manipulation of user sessions.",
     labels: ["security", "web application", "XSS", "vulnerability"],
+    creator: {
+      _id: "u106",
+      fullName: "David Lee",
+    },
   },
   {
     _id: "ouNhdG",
@@ -61,6 +72,10 @@ export const bugsData = [
     description:
       "This bug enables attackers to overwrite adjacent memory locations, potentially leading to system crashes or remote code execution.",
     labels: ["security", "networking", "buffer overflow", "vulnerability"],
+    creator: {
+      _id: "u107",
+      fullName: "Eve Wilson",
+    },
   },
   {
     _id: "hCnd1W",
@@ -70,6 +85,10 @@ export const bugsData = [
     description:
       "Attackers can manipulate SQL queries to access, modify, or delete sensitive data stored in the database, compromising user privacy and integrity.",
     labels: ["security", "SQL injection", "vulnerability", "e-commerce"],
+    creator: {
+      _id: "u107",
+      fullName: "Eve Wilson",
+    },
   },
   {
     _id: "0MFLpR",
@@ -79,6 +98,10 @@ export const bugsData = [
     description:
       "This bug allows attackers to flood the DNS server with requests, rendering it unable to respond to legitimate queries and disrupting network services.",
     labels: ["security", "networking", "DoS", "vulnerability"],
+    creator: {
+      _id: "u107",
+      fullName: "Eve Wilson",
+    },
   },
   {
     _id: "ilvaIN",
@@ -93,5 +116,9 @@ export const bugsData = [
       "privilege escalation",
       "vulnerability",
     ],
+    creator: {
+      _id: "u106",
+      fullName: "David Lee",
+    },
   },
 ]

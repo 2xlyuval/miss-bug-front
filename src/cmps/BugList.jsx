@@ -1,8 +1,8 @@
+import { Link, useNavigate } from "react-router-dom"
+import { BugPreview } from "./BugPreview"
 
-import { Link } from 'react-router-dom'
-import { BugPreview } from './BugPreview'
-
-export function BugList({ bugs, onRemoveBug, onEditBug }) {
+export function BugList({ bugs, onRemoveBug }) {
+  const navigate = useNavigate()
   return (
     <ul className="bug-list">
       {bugs.map((bug) => (
@@ -18,7 +18,7 @@ export function BugList({ bugs, onRemoveBug, onEditBug }) {
             </button>
             <button
               onClick={() => {
-                onEditBug(bug)
+                navigate(`/bug/edit/${bug._id}`)
               }}
             >
               Edit

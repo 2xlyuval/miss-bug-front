@@ -8,6 +8,7 @@ import { Route, HashRouter as Router, Routes } from "react-router-dom"
 import { UserMsg } from "./cmps/UserMsg.jsx"
 import { UserIndex } from "./pages/UserIndex.jsx"
 import { UserEdit } from "./cmps/UserEdit.jsx"
+import { BugEdit } from "./pages/BugEdit.jsx"
 
 export function App() {
   return (
@@ -17,7 +18,9 @@ export function App() {
         <main className="container">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/bug" element={<BugIndex />} />
+            <Route path="/bug" element={<BugIndex />}>
+              <Route path="/bug/edit/:bugId" element={<BugEdit />} />
+            </Route>
             <Route path="/bug/:bugId" element={<BugDetails />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/user" element={<UserIndex />}>
