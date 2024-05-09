@@ -1,50 +1,137 @@
 import { useState } from "react"
+import { userService } from "../services/user.service"
 
 export function LoginSignup() {
-  const [account, setAccount] = useState(null)
+  // Will be in the store in the future~~
+  const [loggedinUser, setLoggedinUser] = useState(
+    userService.getLoggedinUser()
+  )
+  const [credentials, setCredentials] = useState({
+    fullName: "",
+    userName: "",
+    password: "",
+  })
   const [isLogin, setIsLogin] = useState(false)
+
+  function handleChange(ev) {
+    const { name, value } = ev.target
+    setCredentials((prevAccount) => ({
+      ...prevAccount,
+      [name]: value,
+    }))
+  }
+
+  async function onSignup(ev) {
+    ev.preventDefault()
+    try {
+      if (
+        !credentials.fullName ||
+        !credentials.userName ||
+        !credentials.password
+      ) {
+        console.log("Please fill in all fields")
+        return
+      }
+      const user = await userService.signup(credentials)
+      console.log("Signup Succesful!", user)
+      setLoggedinUser(user)
+    } catch (err) {
+      console.log("Error from onSignup ->", err)
+    }
+  }
+
+  async function onLogin(ev) {
+    ev.preventDefault()
+    try {
+      if (!credentials.userName || !credentials.password) {
+        console.log("Please fill in all fields")
+        return
+      }
+      const user = await userService.login(credentials)
+      console.log("Login Succesful!", user)
+      setLoggedinUser(user)
+    } catch (err) {
+      console.log("Error from onLogin ->", err)
+    }
+  }
+
+  async function onLogout() {
+    try {
+      await userService.logout()
+      setLoggedinUser(null)
+      setCredentials({
+        fullName: "",
+        userName: "",
+        password: "",
+      })
+    } catch (error) {
+      console.log("Error from onLogout ->", error)
+    }
+  }
 
   return (
     <div>
-      {account && (
+      {loggedinUser ? (
         <div>
-          <h2>Hello {account.username}</h2>
-          <button type="button" onClick={() => setAccount(null)}>
+          <h2>Hello {loggedinUser.userName}</h2>
+          <button type="button" onClick={onLogout}>
             Logout
           </button>
         </div>
+      ) : (
+        <div>
+          <h2>{isLogin ? "Login" : "Signup"}</h2>
+          <form>
+            <label>
+              User Name:
+              <input
+                type="text"
+                name="userName"
+                value={credentials.userName}
+                onChange={handleChange}
+              />
+            </label>
+            <br />
+            {!isLogin && (
+              <label>
+                Full Name:
+                <input
+                  type="fullName"
+                  name="fullName"
+                  value={credentials.fullName}
+                  onChange={handleChange}
+                />
+              </label>
+            )}
+            <br />
+            <label>
+              Password:
+              <input
+                type="password"
+                name="password"
+                value={credentials.password}
+                onChange={handleChange}
+              />
+            </label>
+            <br />
+            {isLogin ? (
+              <button type="button" onClick={onLogin}>
+                Login
+              </button>
+            ) : (
+              <button type="button" onClick={onSignup}>
+                Signup
+              </button>
+            )}
+          </form>
+          <p>
+            {isLogin ? "Don't have an account? " : "Already have an account? "}
+            <button type="button" onClick={() => setIsLogin(!isLogin)}>
+              {isLogin ? "Signup" : "Login"}
+            </button>
+          </p>
+        </div>
       )}
-      <h2>{isLogin ? "Login" : "Signup"}</h2>
-      <form>
-        <label>
-          Email:
-          <input type="email" name="email" />
-        </label>
-        <br />
-        {!isLogin && (
-          <label>
-            User Name:
-            <input type="text" name="username" />
-          </label>
-        )}
-        <br />
-        <label>
-          Password:
-          <input type="password" name="password" />
-        </label>
-        <br />
-        {isLogin ? (
-          <button type="button">Login</button>
-        ) : (
-          <button type="button">Signup</button>
-        )}
-      </form>
-      <p>
-        {isLogin ? "Don't have an account? " : "Already have an account? "}
-        <button type="button" onClick={() => setIsLogin(!isLogin)}>
-          {isLogin ? "Signup" : "Login"}
-        </button>
-      </p>
     </div>
   )
 }

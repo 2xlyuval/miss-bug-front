@@ -3,14 +3,18 @@ var axios = Axios.create({
   withCredentials: true,
 })
 
-// const BASE_URL = "//localhost:3030/api/user/"
-// const BASE_URL = "/api/user/"
+const STORAGE_KEY_LOGGEDIN_USER = "loggedinUser"
+
 const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "/api/user/"
-    : "//localhost:3030/api/user/"
+  process.env.NODE_ENV === "production" ? "/api/" : "//localhost:3030/api/"
+
+const BASE_USER_URL = BASE_URL + "user/"
+const BASE_AUTH_URL = BASE_URL + "auth/"
 
 export const userService = {
+  signup,
+  login,
+  logout,
   query,
   getById,
   save,
@@ -18,10 +22,36 @@ export const userService = {
   getFilterFromParams,
   getDefaultFilter,
   getDefaultUser,
+  getLoggedinUser,
+}
+
+async function signup(userCred) {
+  const { data: user } = await axios.post(BASE_AUTH_URL + "signup", userCred)
+  return saveLocalUser(user)
+}
+
+async function login(userCred) {
+  const { data: user } = await axios.post(BASE_AUTH_URL + "login", userCred)
+  return saveLocalUser(user)
+}
+
+async function logout() {
+  await axios.post(BASE_AUTH_URL + "logout")
+  sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
+}
+
+function saveLocalUser(user) {
+  user = { _id: user._id, fullName: user.fullName, userName: user.userName }
+  sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
+  return user
+}
+
+function getLoggedinUser() {
+  return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
 }
 
 async function query(filterBy = {}) {
-  var { data: users } = await axios.get(BASE_URL, {
+  var { data: users } = await axios.get(BASE_USER_URL, {
     params: filterBy,
   })
 
@@ -29,18 +59,18 @@ async function query(filterBy = {}) {
 }
 
 async function remove(userId) {
-  await axios.delete(`${BASE_URL}${userId}`)
+  await axios.delete(`${BASE_USER_URL}${userId}`)
 }
 
 async function getById(userId) {
-  const { data: user } = await axios.get(`${BASE_URL}${userId}`)
+  const { data: user } = await axios.get(`${BASE_USER_URL}${userId}`)
   return user
 }
 
 async function save(user) {
   const method = user._id ? "put" : "post"
   const { data: savedUser } = await axios[method](
-    BASE_URL + (user._id || ""),
+    BASE_USER_URL + (user._id || ""),
     user
   )
 
