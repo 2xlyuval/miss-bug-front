@@ -17,6 +17,7 @@ export const bugService = {
   remove,
   getFilterFromParams,
   getDefaultFilter,
+  getDefaultBug,
 }
 
 async function query(filterBy = {}) {
@@ -65,4 +66,14 @@ function getFilterFromParams(searchParams) {
     filterBy[field] = searchParams.get(field) || defaultFilter[field]
   }
   return filterBy
+}
+
+function getDefaultBug() {
+  return {
+    title: "",
+    description: "",
+    severity: 1,
+    createdAt: Date.now(),
+    labels: [],
+  }
 }

@@ -50,12 +50,7 @@ export function UserIndex() {
   if (!users) return <div>Loading...</div>
   return (
     <main className="user-index">
-      <h1>User Index</h1>
-      {/* <UserFilter onSetFilterBy={onSetFilterBy} filterBy={filterBy} /> */}
-      <Link to="/user/edit">
-        <button>Add User</button>
-      </Link>
-
+      <h1>Users</h1>
       <UserList users={users} onRemoveUser={onRemoveUser} />
       <Outlet context={{ onSaveUser }} />
     </main>

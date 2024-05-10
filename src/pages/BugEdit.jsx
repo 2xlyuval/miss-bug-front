@@ -76,6 +76,7 @@ export function BugEdit() {
           />
         </div>
         <button>Save</button>
+        <button onClick={() => navigate("/bug")}>Cancel</button>
       </form>
     </div>
   )

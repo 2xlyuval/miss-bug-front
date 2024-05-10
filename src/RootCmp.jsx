@@ -9,6 +9,7 @@ import { UserMsg } from "./cmps/UserMsg.jsx"
 import { UserIndex } from "./pages/UserIndex.jsx"
 import { UserEdit } from "./cmps/UserEdit.jsx"
 import { BugEdit } from "./pages/BugEdit.jsx"
+import { UserDetails } from "./pages/UserDetails.jsx"
 
 export function App() {
   return (
@@ -24,8 +25,9 @@ export function App() {
             <Route path="/bug/:bugId" element={<BugDetails />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/user" element={<UserIndex />}>
-              <Route path=":userId" element={<UserEdit />} />
+              <Route path="/user/edit/:userId" element={<UserEdit />} />
             </Route>
+            <Route path="/user/:userId" element={<UserDetails />} />
           </Routes>
         </main>
         <AppFooter />

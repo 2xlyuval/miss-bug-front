@@ -9,7 +9,9 @@ export function UserList({ users, onRemoveUser }) {
         <li key={user._id}>
           <UserPreview user={user} />
           <div className="user-actions">
-            <button onClick={() => navigate(`/user/${user._id}`)}>Edit</button>
+            <button onClick={() => navigate(`/user/edit/${user._id}`)}>
+              Edit
+            </button>
             <button onClick={() => onRemoveUser(user._id)}>X</button>
           </div>
           <Link to={`/user/${user._id}`}>Details</Link>
