@@ -32,7 +32,7 @@ export function BugEdit() {
 
   function handleSubmit(ev) {
     ev.preventDefault()
-    if (bugId) {
+    if (bugId !== "new") {
       context.onUpdateBug(bug)
     } else {
       context.onAddBug(bug)

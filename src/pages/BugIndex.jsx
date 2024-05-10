@@ -35,23 +35,6 @@ export function BugIndex() {
     }
   }
 
-  async function onAddBug() {
-    const bug = {
-      title: prompt("Bug title?"),
-      severity: +prompt("Bug severity?"),
-      description: prompt("Bug description?"),
-    }
-    try {
-      const savedBug = await bugService.save(bug)
-      console.log("Added Bug", savedBug)
-      setBugs((prevBugs) => [...prevBugs, savedBug])
-      showSuccessMsg("Bug added")
-    } catch (err) {
-      console.log("Error from onAddBug ->", err)
-      showErrorMsg("Cannot add bug")
-    }
-  }
-
   function onDownloadBugs() {
     console.log("Downloading bugs...")
   }

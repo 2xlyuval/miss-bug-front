@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { userService } from "../services/user.service"
+import { Link, useNavigate } from "react-router-dom"
 
 export function LoginSignup() {
   // Will be in the store in the future~~
@@ -12,6 +13,7 @@ export function LoginSignup() {
     password: "",
   })
   const [isLogin, setIsLogin] = useState(false)
+  const navigate = useNavigate()
 
   function handleChange(ev) {
     const { name, value } = ev.target
@@ -64,6 +66,7 @@ export function LoginSignup() {
         userName: "",
         password: "",
       })
+      navigate("/bug")
     } catch (error) {
       console.log("Error from onLogout ->", error)
     }
@@ -74,6 +77,7 @@ export function LoginSignup() {
       {loggedinUser ? (
         <div>
           <h2>Hello {loggedinUser.userName}</h2>
+          <Link to={`/user/${loggedinUser._id}`}>My Bugs</Link>
           <button type="button" onClick={onLogout}>
             Logout
           </button>
