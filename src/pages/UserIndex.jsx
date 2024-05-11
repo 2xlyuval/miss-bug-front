@@ -3,8 +3,6 @@ import { userService } from "../services/user.service"
 import { UserList } from "../cmps/UserList"
 import { showErrorMsg } from "../services/event-bus.service"
 import { Outlet } from "react-router"
-import { UserEdit } from "../cmps/UserEdit"
-import { Link } from "react-router-dom"
 
 export function UserIndex() {
   const [users, setUsers] = useState(null)

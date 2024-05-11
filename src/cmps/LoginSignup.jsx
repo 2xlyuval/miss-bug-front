@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { userService } from "../services/user.service"
 import { Link, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { login, logout } from "../store/actions/user.action"

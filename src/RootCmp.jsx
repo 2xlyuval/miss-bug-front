@@ -12,6 +12,7 @@ import { BugEdit } from "./pages/BugEdit.jsx"
 import { UserDetails } from "./pages/UserDetails.jsx"
 import { Provider } from "react-redux"
 import { store } from "./store/store.js"
+import { RoutGuard } from "./cmps/RoutGuard.jsx"
 
 export function App() {
   return (
@@ -27,7 +28,14 @@ export function App() {
               </Route>
               <Route path="/bug/:bugId" element={<BugDetails />} />
               <Route path="/about" element={<AboutUs />} />
-              <Route path="/user" element={<UserIndex />}>
+              <Route
+                path="/user"
+                element={
+                  <RoutGuard>
+                    <UserIndex />
+                  </RoutGuard>
+                }
+              >
                 <Route path="/user/edit/:userId" element={<UserEdit />} />
               </Route>
               <Route path="/user/:userId" element={<UserDetails />} />
