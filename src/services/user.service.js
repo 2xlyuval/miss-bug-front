@@ -25,6 +25,8 @@ export const userService = {
   getLoggedinUser,
 }
 
+window.userService = userService
+
 async function signup(userCred) {
   const { data: user } = await axios.post(BASE_AUTH_URL + "signup", userCred)
   return saveLocalUser(user)
@@ -41,7 +43,13 @@ async function logout() {
 }
 
 function saveLocalUser(user) {
-  user = { _id: user._id, fullName: user.fullName, userName: user.userName }
+  user = {
+    _id: user._id,
+    fullName: user.fullName,
+    userName: user.userName,
+    score: user.score,
+    isAdmin: user.isAdmin,
+  }
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
   return user
 }
