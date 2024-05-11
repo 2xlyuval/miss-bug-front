@@ -35,6 +35,7 @@ export function LoginSignup() {
         return
       }
       const user = await login(credentials)
+      //Q - if it fail to login, it return undefined
       console.log("Signup Succesful!", user)
     } catch (err) {
       console.log("Error from onSignup ->", err)
@@ -50,6 +51,7 @@ export function LoginSignup() {
       }
 
       const user = await login(credentials)
+      //Q - if it fail to login, it return undefined
       console.log("Login Succesful!", user)
     } catch (err) {
       console.log("Error from onLogin ->", err)
