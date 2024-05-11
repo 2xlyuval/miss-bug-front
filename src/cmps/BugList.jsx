@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom"
 import { BugPreview } from "./BugPreview"
 import { userService } from "../services/user.service"
+import { useSelector } from "react-redux"
 
 export function BugList({ bugs, onRemoveBug }) {
-  const loggedinUser = userService.getLoggedinUser()
+  const loggedinUser = useSelector((state) => state.userModule.loggedInUser)
   const navigate = useNavigate()
 
   function isUserAuthorized(bug) {

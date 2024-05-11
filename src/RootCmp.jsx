@@ -10,29 +10,33 @@ import { UserIndex } from "./pages/UserIndex.jsx"
 import { UserEdit } from "./cmps/UserEdit.jsx"
 import { BugEdit } from "./pages/BugEdit.jsx"
 import { UserDetails } from "./pages/UserDetails.jsx"
+import { Provider } from "react-redux"
+import { store } from "./store/store.js"
 
 export function App() {
   return (
-    <Router>
-      <div className="main-app">
-        <AppHeader />
-        <main className="container">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/bug" element={<BugIndex />}>
-              <Route path="/bug/edit/:bugId" element={<BugEdit />} />
-            </Route>
-            <Route path="/bug/:bugId" element={<BugDetails />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/user" element={<UserIndex />}>
-              <Route path="/user/edit/:userId" element={<UserEdit />} />
-            </Route>
-            <Route path="/user/:userId" element={<UserDetails />} />
-          </Routes>
-        </main>
-        <AppFooter />
-        <UserMsg />
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <div className="main-app">
+          <AppHeader />
+          <main className="container">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/bug" element={<BugIndex />}>
+                <Route path="/bug/edit/:bugId" element={<BugEdit />} />
+              </Route>
+              <Route path="/bug/:bugId" element={<BugDetails />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/user" element={<UserIndex />}>
+                <Route path="/user/edit/:userId" element={<UserEdit />} />
+              </Route>
+              <Route path="/user/:userId" element={<UserDetails />} />
+            </Routes>
+          </main>
+          <AppFooter />
+          <UserMsg />
+        </div>
+      </Router>
+    </Provider>
   )
 }

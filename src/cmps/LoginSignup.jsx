@@ -1,11 +1,12 @@
 import { useState } from "react"
 import { userService } from "../services/user.service"
 import { Link, useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { login, logout } from "../store/actions/user.action"
 
 export function LoginSignup() {
-  // Will be in the store in the future~~
-  const [loggedinUser, setLoggedinUser] = useState(
-    userService.getLoggedinUser()
+  const loggedinUser = useSelector(
+    (storeState) => storeState.userModule.loggedInUser
   )
   const [credentials, setCredentials] = useState({
     fullName: "",
@@ -34,9 +35,8 @@ export function LoginSignup() {
         console.log("Please fill in all fields")
         return
       }
-      const user = await userService.signup(credentials)
+      const user = await login(credentials)
       console.log("Signup Succesful!", user)
-      setLoggedinUser(user)
     } catch (err) {
       console.log("Error from onSignup ->", err)
     }
@@ -49,9 +49,9 @@ export function LoginSignup() {
         console.log("Please fill in all fields")
         return
       }
-      const user = await userService.login(credentials)
+
+      const user = await login(credentials)
       console.log("Login Succesful!", user)
-      setLoggedinUser(user)
     } catch (err) {
       console.log("Error from onLogin ->", err)
     }
@@ -59,8 +59,7 @@ export function LoginSignup() {
 
   async function onLogout() {
     try {
-      await userService.logout()
-      setLoggedinUser(null)
+      await logout()
       setCredentials({
         fullName: "",
         userName: "",
