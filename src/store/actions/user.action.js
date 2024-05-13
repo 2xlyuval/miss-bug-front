@@ -9,6 +9,7 @@ export async function login(userCred) {
     return user
   } catch (error) {
     console.log("Error from login ->", error)
+    throw error
   }
 }
 
